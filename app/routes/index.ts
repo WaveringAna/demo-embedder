@@ -13,12 +13,12 @@ import { ffProbe } from "../lib/ffmpeg";
 
 import fs from "fs";
 
-import { extension, videoExtensions } from "../lib/lib";
-import { db, MediaRow, getPath, deleteId } from "../lib/db";
+import { extension /**, videoExtensions**/ } from "../lib/lib";
+import { db, MediaRow /**, getPath, deleteId **/ } from "../lib/db";
 import { fileStorage } from "../lib/multer";
 import {
-  checkAuth,
-  checkSharexAuth,
+  //checkAuth,
+  //checkSharexAuth,
   convertTo720p,
   createEmbedData,
   handleUpload,
@@ -27,7 +27,8 @@ import {
 const upload = multer({ storage: fileStorage /**, fileFilter: fileFilter**/ }); //maybe make this a env variable?
 /**Middleware to grab media from media database */
 const fetchMedia: Middleware = (req, res, next) => {
-  const admin: boolean = req.user.username == "admin" ? true : false;
+  //const admin: boolean = req.user.username == "admin" ? true : false;
+  const admin = true;
   /**Check if the user is an admin, if so, show all posts from all users */
   const query: string =
     admin == true
@@ -55,10 +56,10 @@ const router = express.Router();
 
 router.get(
   "/",
-  (req: Request, res: Response, next: NextFunction) => {
+  /*(req: Request, res: Response, next: NextFunction) => {
     if (!req.user) return res.render("home");
     next();
-  },
+  },*/
   fetchMedia,
   (req: Request, res: Response) => {
     res.locals.filter = null;
@@ -118,7 +119,7 @@ router.get(
 router.post(
   "/",
   [
-    checkAuth,
+    /*checkAuth,*/
     upload.array("fileupload"),
     convertTo720p,
     createEmbedData,
@@ -129,7 +130,7 @@ router.post(
   },
 );
 
-router.post(
+/*router.post(
   "/sharex",
   [checkSharexAuth, upload.single("fileupload"), createEmbedData, handleUpload],
   (req: Request, res: Response) => {
@@ -137,13 +138,13 @@ router.post(
       `${req.protocol}://${req.get("host")}/uploads/${req.file.filename}`,
     );
   },
-);
+);*/
 
 router.post(
   "/:id(\\d+)/delete",
-  [checkAuth],
+  //[checkAuth],
   async (req: Request, res: Response) => {
-    const path: any = await getPath(req.params.id);
+    /*const path: any = await getPath(req.params.id);
 
     const nameAndExtension = extension(path.path);
 
@@ -164,7 +165,7 @@ router.post(
         }
         await deleteId("media", req.params.id);
       });
-    });
+    });*/
 
     return res.redirect("/");
   },

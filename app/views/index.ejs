@@ -19,17 +19,15 @@
             <h1>Embedder</h1>
             <nav class="nav">
                <ul class="left-ul">
-                  <li class="user"><%= user.name || user.username %></li>
+                  <li class="user">admin</li>
                   <li>
-                     <form action="/logout" method="post">
-                        <button class="logout" type="submit"></button>
-                     </form>
+                     <!--<form action="/logout" method="post">-->
+                        <button class="logout"></button>
+                     <!--</form>-->
                   </li>
-                  <% if (user.name == "admin" || user.username == "admin") { %>
                   <li>
-                     <button class="adduser" onclick="location.href='/adduser';"></a></button>
+                     <button class="adduser"></button>
                   </li>
-                  <% } %>
                </ul>
                <input type="text" id="search" name="search" placeholder="Search" value=""/>
             </nav>

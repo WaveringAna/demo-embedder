@@ -128,10 +128,9 @@ export const handleUpload: Middleware = (req, res, next) => {
   }
 
   const files = req.files ? (req.files as Express.Multer.File[]) : req.file; //Check if a single file was uploaded or multiple
-  const username = req.user ? req.user.username : "sharex"; //if no username was provided, we can presume that it is sharex
-  const expireDate: Date = req.body.expire
-    ? new Date(Date.now() + req.body.expire * 24 * 60 * 60 * 1000)
-    : null;
+  //const username = req.user ? req.user.username : "sharex"; //if no username was provided, we can presume that it is sharex
+  const username = "admin";
+  const expireDate: Date = null; //1 minute in days
 
   if (files instanceof Array) {
     for (const file in files) {

@@ -127,10 +127,6 @@ const imageExtensions = ['.jpg', '.jpeg', '.png', '.gif', '.bmp', '.svg', '.tiff
           <source src="/uploads/720p-<%= file.path %>" loading="lazy">
         </video>
         <div class="overlay">
-         <% if(user.username == "admin" && file.username != "admin") { %>
-         <small class="username"><%= file.username %></small>
-         <br>
-         <% } %>
          <a href="/gifv/<%=file.path %>" onclick="copyA(event)">Copy as GIFv</a>
          </div>
       </div>
@@ -138,31 +134,17 @@ const imageExtensions = ['.jpg', '.jpeg', '.png', '.gif', '.bmp', '.svg', '.tiff
       <div class="video">
         <img class="image" src="/uploads/720p-<%=file.path %>" width="100%" onclick="copyURI(event);" loading="lazy">
         <div class="overlay">
-          <% if(user.username == "admin" && file.username != "admin") { %>
-          <small class="username"><%= file.username %></small>
-          <br>
-          <% } %>
           <a href="/gifv/<%=file.path %>" onclick="copyA(event)">Copy as GIFv</a>
         </div>
       </div>
       <% } else if (imageExtensions.includes(extension(file.path))) { %>
       <div class="video">
         <img class="image" src="/uploads/<%=file.path %>" width="100%" onclick="copyURI(event)" loading="lazy">
-        <% if(user.username == "admin" && file.username != "admin") { %>
-        <div class="overlay">
-          <small class="username"><%= file.username %></small>
-        </div>
-        <% } %>
       </div>
       <% } else {%>
       <!-- non-media file -->
       <div class="nonmedia" onclick="copyPath('/uploads/<%=file.path%>')">
         <p><%=extension(file.path)%> file</p>
-        <% if(user.username == "admin" && file.username != "admin") { %>
-        <div class="overlay">
-          <small class="username"><%= file.username %></small>
-        </div>
-        <% } %>
       </div>
       <% } %>
       <label><%= file.path %></label>
